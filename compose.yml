@@ -1,0 +1,21 @@
+services:
+
+  oracle:
+    image: container-registry.oracle.com/database/free:latest-lite
+    container_name: oracle-free
+
+    ports:
+      - "1521:1521"
+
+    environment:
+      ORACLE_PWD: Oracle1234
+      ORACLE_CHARACTERSET: AL32UTF8
+
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./sql_ex:/opt/oracle/scripts/setup
+
+    restart: unless-stopped
+
+volumes:
+  oracle_data:
